@@ -178,7 +178,7 @@ function writeCondition(workbook: ExcelScript.Workbook, mainSheet: ExcelScript.W
   conditionUpdatedByMerge.unmerge();
 
   conditionUpdatedByData.setValue(`Condition updated on ${condition["Condition"]["Updated Date"].split('+')[0]}
-   by ${condition["Condition"]["Updated By"]}`);
+     by ${condition["Condition"]["Updated By"]}`);
 
   conditionUpdatedByData.getFormat().autofitRows();
 
@@ -303,8 +303,8 @@ function writeCondition(workbook: ExcelScript.Workbook, mainSheet: ExcelScript.W
   const isCondition = mainSheet.getRange(`A${topRow}:H${topRow}`)
   isCondition.unmerge();
   isCondition.getFormat().setWrapText(true)
-  const isConditionRemovedHTML: string = removeHTML(condition["Condition"]["Is Condition"])
-  isCondition.setValue(`${isConditionRemovedHTML}`);
+  // const isConditionRemovedHTML: string = removeHTML(condition["Condition"]["Is Condition"])
+  isCondition.setValue(`${condition["Condition"]["Is Condition"]}`);
   isCondition.merge();
   isCondition.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
   isCondition.getFormat().setHorizontalAlignment(ExcelScript.HorizontalAlignment.left);
@@ -320,8 +320,8 @@ function writeCondition(workbook: ExcelScript.Workbook, mainSheet: ExcelScript.W
   const shouldBeCondition = mainSheet.getRange(`A${topRow}:H${topRow}`)
   shouldBeCondition.unmerge();
   shouldBeCondition.getFormat().setWrapText(true)
-  const shouldBeConditionRemovedHTML: string = removeHTML(condition["Condition"]["Should be "])
-  shouldBeCondition.setValue(`${shouldBeConditionRemovedHTML}`);
+  // const shouldBeConditionRemovedHTML: string = removeHTML(condition["Condition"]["Should be "])
+  shouldBeCondition.setValue(`${condition["Condition"]["Should be "]}`);
   shouldBeCondition.merge();
   shouldBeCondition.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
   shouldBeCondition.getFormat().setHorizontalAlignment(ExcelScript.HorizontalAlignment.left);
@@ -379,7 +379,7 @@ function writeCondition(workbook: ExcelScript.Workbook, mainSheet: ExcelScript.W
     currentRow++
     const dispositionAssigneeHeader = mainSheet.getRange(`A${currentRow}`)
     dispositionAssigneeHeader.setValue(`Disposition Assignee:
-${dispo["Disposition Assignee"] || 'N/A'}`);
+  ${dispo["Disposition Assignee"] || 'N/A'}`);
     // let adjustedHeight: number = dispositionAssigneeHeader.getFormat().getRowHeight();
     // dispositionAssigneeHeader.getFormat().setRowHeight(adjustedHeight);
     dispositionAssigneeHeader.getFormat().setRowHeight(33)
@@ -389,7 +389,7 @@ ${dispo["Disposition Assignee"] || 'N/A'}`);
     const requireVerification = mainSheet.getRange(`B${currentRow}:D${currentRow}`)
     requireVerification.unmerge()
     requireVerification.setValue(`Require Verification:
-${dispo["Require Verification"] || 'N/A'}`);
+  ${dispo["Require Verification"] || 'N/A'}`);
     // let adjustedHeight: number = dispositionAssigneeHeader.getFormat().getRowHeight();
     // dispositionAssigneeHeader.getFormat().setRowHeight(adjustedHeight);
     requireVerification.merge()
@@ -399,7 +399,7 @@ ${dispo["Require Verification"] || 'N/A'}`);
     const classification = mainSheet.getRange(`E${currentRow}:G${currentRow}`)
     classification.unmerge()
     classification.setValue(`Classification:
-${dispo["Classification"] || 'N/A'}`);
+  ${dispo["Classification"] || 'N/A'}`);
     // let adjustedHeight: number = dispositionAssigneeHeader.getFormat().getRowHeight();
     // dispositionAssigneeHeader.getFormat().setRowHeight(adjustedHeight);
     classification.merge()
@@ -410,7 +410,7 @@ ${dispo["Classification"] || 'N/A'}`);
     const riskAssessment = mainSheet.getRange(`A${currentRow}:C${currentRow}`)
     riskAssessment.unmerge()
     riskAssessment.setValue(`Risk Assessment:
-${dispo["Risk Assessment"] || 'N/A'}`);
+  ${dispo["Risk Assessment"] || 'N/A'}`);
     riskAssessment.merge()
     riskAssessment.getFormat().setRowHeight(33)
     riskAssessment.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.center);
@@ -420,7 +420,7 @@ ${dispo["Risk Assessment"] || 'N/A'}`);
       const repair = mainSheet.getRange(`D${currentRow}:F${currentRow}`)
       repair.unmerge()
       repair.setValue(`Repair:
-${dispo["Repair"]}`);
+  ${dispo["Repair"]}`);
       repair.merge()
       repair.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.center);
       repair.getFormat().setHorizontalAlignment(ExcelScript.HorizontalAlignment.left);
@@ -430,7 +430,7 @@ ${dispo["Repair"]}`);
     const rationale = mainSheet.getRange(`A${currentRow}:H${currentRow}`)
     rationale.unmerge()
     rationale.setValue(`Rationale:
-${dispo["Rationale"]}`);
+  ${dispo["Rationale"]}`);
     rationale.merge()
     rationale.getFormat().setWrapText(true)
     rationale.getFormat().setRowHeight(33)
@@ -455,7 +455,7 @@ ${dispo["Rationale"]}`);
       for (let approval of dispo["Disposition Approvals"]) {
         const qualification = mainSheet.getRange(`A${currentRow}`)
         qualification.setValue(`Qualification:
-${approval["Qualification"]}`)
+  ${approval["Qualification"]}`)
         qualification.getFormat().getFont().setBold(true);
         qualification.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.center);
 
@@ -471,12 +471,12 @@ ${approval["Qualification"]}`)
         if (approval["Signature"]) {
           const signature = mainSheet.getRange(`F${currentRow}:H${currentRow}`)
           signature.unmerge()
-          const splitSignature:string[] = approval["Signature"].split(',')
+          const splitSignature: string[] = approval["Signature"].split(',')
           const name: string = splitSignature[0]
           const time: string = splitSignature[1].split('+')[0]
           signature.setValue(`Approved: 
-by ${name}
-on ${time}`)
+  by ${name}
+  on ${time}`)
           signature.getFormat().getFont().setBold(true);
           signature.getFormat().setWrapText(true)
           signature.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.center);
@@ -501,12 +501,12 @@ on ${time}`)
     const instructionsHeader = mainSheet.getRange(`A${currentRow}`)
     instructionsHeader.setValue(`Disposition Instructions:`)
     instructionsHeader.getFormat().getFont().setBold(true);
-    
+
     currentRow++
     const instructions = mainSheet.getRange(`A${currentRow}:H${currentRow}`)
     instructions.unmerge()
-    const removeInstructionsHTML: string = removeHTML(dispo["Instructions"])
-    instructions.setValue(`${removeInstructionsHTML}`)
+    //   const removeInstructionsHTML: string = removeHTML(dispo["Instructions"])
+    instructions.setValue(`${dispo["Instructions"]}`)
     instructions.merge()
     instructions.getFormat().setWrapText(true)
     instructions.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
@@ -516,17 +516,17 @@ on ${time}`)
     let margin = mainSheet.getRange(`A${currentRow}:H${currentRow}`)
     margin.getFormat().setRowHeight(10)
 
-    
+
     currentRow++
     const executionHeader = mainSheet.getRange(`A${currentRow}`)
     executionHeader.setValue(`Execution Notes:`)
     executionHeader.getFormat().getFont().setBold(true);
-    
+
     currentRow++
     const executionNotes = mainSheet.getRange(`A${currentRow}:H${currentRow}`)
     executionNotes.unmerge()
-    const executionNotesHTML: string = removeHTML(dispo["ExecutionNotes"])
-    executionNotes.setValue(`${executionNotesHTML}`)
+    //   const executionNotesHTML: string = removeHTML(dispo["ExecutionNotes"])
+    executionNotes.setValue(`${dispo["ExecutionNotes"]}`)
     executionNotes.merge()
     executionNotes.getFormat().setWrapText(true)
     executionNotes.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
@@ -546,7 +546,7 @@ on ${time}`)
     const verificationNotes = mainSheet.getRange(`A${currentRow}:H${currentRow}`)
     verificationNotes.unmerge()
     const verificationNotesHTML: string = removeHTML(dispo["Verification Notes"])
-    verificationNotes.setValue(`${verificationNotesHTML}`)
+    verificationNotes.setValue(`${dispo["Verification Notes"]}`)
     verificationNotes.merge()
     verificationNotes.getFormat().setWrapText(true)
     verificationNotes.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
@@ -620,11 +620,11 @@ on ${time}`)
     commentText.getFormat().setVerticalAlignment(ExcelScript.VerticalAlignment.top);
     commentText.getFormat().setHorizontalAlignment(ExcelScript.HorizontalAlignment.left);
 
-    topRow+=2
+    topRow += 2
   }
 
 
-  topRow+=2
+  topRow += 2
   const endOfCondition = mainSheet.getRange(`A${topRow}:H${topRow}`)
   endOfCondition.unmerge()
   endOfCondition.setValue(`End of Condition ${condition["Condition"]["Condition Number"]}`)
@@ -644,13 +644,13 @@ function removeHTML(inputString: string) {
     .replace(/&nbsp;/gi, ' ')      // Replace &nbsp; with space
     .replace(/&[a-z]+;/gi, ' ')   // Replace other named HTML entities with space (like &gt;, &lt;, etc.)
     .replace(/<br\s*\/?>/gi, `
-    `)  // Replace <br> and its variants with line breaks
+      `)  // Replace <br> and its variants with line breaks
     .replace(/<[^>]*>/g, ' ')      // Remove all other HTML tags and replace them with spaces
     .replace(/\s+/g, ' ')          // Replace multiple spaces with a single space
     .replace(/\s+\n/g, `
-    `)       // Remove spaces before a newline
+      `)       // Remove spaces before a newline
     .replace(/\n\s+/g, `
-    `)       // Remove spaces after a newline
+      `)       // Remove spaces after a newline
     .trim();                       // Remove any spaces or newlines at the beginning and end
 }
 
@@ -693,7 +693,7 @@ function writeHeader(workbook: ExcelScript.Workbook, mainSheet: ExcelScript.Work
   // For other cells
   B1.setValue(headerObj["Status"]);
   E2.setValue(`Last updated on ${updatedDate.split("+")[0]}
-by ${updatedBy}`);
+  by ${updatedBy}`);
   E2.getFormat().getFont().setColor("#6B6B6B");
   E1H1.setValue(`Assignee: ${headerObj["NC Assignee"]}`);
 
